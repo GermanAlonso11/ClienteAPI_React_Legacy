@@ -12,6 +12,8 @@ import Clientes from "./componentes/clientes/Clientes";
 import Productos from "./componentes/productos/Productos";
 import Pedidos from "./componentes/pedidos/Pedidos";
 
+/* */
+
 function App() {
   return (
     <Router>
@@ -26,8 +28,6 @@ function App() {
               <Route exact path="/productos"  element={<Productos/>} />
               <Route exact path="/pedidos" element={<Pedidos/>} />
             </Routes>
-
-
           </main>
         </div>
       </Fragment>
