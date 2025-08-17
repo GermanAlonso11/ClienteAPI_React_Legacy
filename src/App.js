@@ -17,14 +17,14 @@ function App() {
     <Router>
       <Fragment>
         <Header />
-        <div class="grid contenedor contenido-principal">
+        <div className="grid contenedor contenido-principal">
           <Navegacion />
-          <main class="caja-contenido col-9">
+          <main className="caja-contenido col-9">
             
             <Routes>
-              <Route exact path="/" component={Clientes} />
-              <Route exact path="/productos" component={Productos} />
-              <Route exact path="/pedidos" component={Pedidos} />
+              <Route exact path="/"  element={<Clientes/>} />
+              <Route exact path="/productos"  element={<Productos/>} />
+              <Route exact path="/pedidos" element={<Pedidos/>} />
             </Routes>
 
 
