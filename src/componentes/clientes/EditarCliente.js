@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import clienteAxios from "../../config/axios";
 import Swal from "sweetalert2";
@@ -17,6 +17,20 @@ function EditarCliente() {
         email: "",
         telefono: ""
     });
+
+    //Query a la API
+    const consultarAPI = async () => {
+        const clienteConsulta = await clienteAxios.get(`/clientes/${id}`);
+    }
+
+
+    //Use effect cuando el componente carga
+    useEffect(() => {
+        consultarAPI();
+    }, []);
+
+
+
 
     //Leer los datos del formulario y colocarlos en el state
     const actualizarState = e => {
