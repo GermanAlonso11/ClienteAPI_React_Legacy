@@ -1,4 +1,6 @@
 import React from 'react';
+//Importar link de react-router-dom
+import { Link } from 'react-router-dom';
 
 function Cliente({cliente}) {
 
@@ -15,10 +17,10 @@ function Cliente({cliente}) {
                         <p>{telefono}</p>
                     </div>
                     <div className="acciones">
-                        <a href="#" className="btn btn-azul">
+                        <Link to={`/clientes/editar/${_id}`} className="btn btn-azul">
                             <i className="fas fa-pen-alt"></i>
                             Editar Cliente
-                        </a>
+                        </Link>
                         <button type="button" className="btn btn-rojo btn-eliminar">
                             <i className="fas fa-times"></i>
                             Eliminar Cliente

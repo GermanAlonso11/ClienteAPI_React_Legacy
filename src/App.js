@@ -12,6 +12,7 @@ import Clientes from "./componentes/clientes/Clientes";
 import Productos from "./componentes/productos/Productos";
 import Pedidos from "./componentes/pedidos/Pedidos";
 import NuevoCliente from "./componentes/clientes/NuevoCliente";
+import EditarCliente from "./componentes/clientes/EditarCliente";
 
 /* */
 
@@ -29,6 +30,7 @@ function App() {
               <Route exact path="/productos"  element={<Productos/>} />
               <Route exact path="/pedidos" element={<Pedidos/>} />
               <Route exact path="/clientes/nuevo" element={<NuevoCliente/>} />
+              <Route exact path="/clientes/editar/:id" element={<EditarCliente/>} />
             </Routes>
           </main>
         </div>

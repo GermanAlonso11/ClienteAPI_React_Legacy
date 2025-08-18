@@ -1,11 +1,11 @@
 import React, { Fragment, useState } from "react";
+import { useParams } from "react-router-dom";
 import clienteAxios from "../../config/axios";
 import Swal from "sweetalert2";
-import { useNavigate } from "react-router-dom"; // Usar useNavigate en lugar de history en React Router v6
 
-
-function NuevoCliente() {
-    const navigate = useNavigate(); // Usar navigate en lugar de history en React Router v6
+function EditarCliente() {
+    //Obtenemos el id del cliente
+    const { id } = useParams(); 
 
     //State para el formulario
     //cliente = state, guardarCliente = funcion para guardar el state
@@ -42,50 +42,13 @@ function NuevoCliente() {
         return valido;
     }
 
-    //Agregar cliente
-const agregarCliente = e => {
-    e.preventDefault();
 
-    //Enviar petición a axios
-    clienteAxios.post('/clientes', cliente)
-        .then(respuesta => {
-            // Éxito al crear el cliente
-            console.log("Se agregó un nuevo cliente");
-            Swal.fire(
-                'Cliente Creado',
-                'El cliente se creó correctamente',
-                'success'
-            );
-        }
-            //Redireccionar al usuario
-            , navigate("/")
-    
-    )
-        .catch(error => {
-            // Manejar errores
-            if (error.response || error.response.data || error.response.data.code === 11000) {
-                console.log("Ese cliente ya está registrado");
-                Swal.fire({
-                    icon: 'error',  // Cambiado de 'type' a 'icon' (versiones actuales de SweetAlert)
-                    title: 'Error',
-                    text: 'Ese cliente ya está registrado'
-                });
-            } else {
-                console.log("Error desconocido:", error);
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Error',
-                    text: 'Ocurrió un error al registrar el cliente'
-                });
-            }
-        });
-}
     
 
   return(
   <Fragment>
     <h2>Nuevo Cliente</h2>
-    <form onSubmit={agregarCliente}>
+    <form>
                 <legend>Llena todos los campos</legend>
 
                 <div className="campo">
@@ -144,4 +107,4 @@ const agregarCliente = e => {
   )
 }
 
-export default NuevoCliente;
+export default EditarCliente;
