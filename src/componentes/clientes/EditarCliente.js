@@ -10,7 +10,7 @@ function EditarCliente() {
     //State para el formulario
     //cliente = state, guardarCliente = funcion para guardar el state
     //Inicializar el state
-    const [cliente, guardarCliente] = useState({
+    const [cliente, datosCliente] = useState({
         nombre: "",
         apellido: "",
         empresa: "",
@@ -21,6 +21,9 @@ function EditarCliente() {
     //Query a la API
     const consultarAPI = async () => {
         const clienteConsulta = await clienteAxios.get(`/clientes/${id}`);
+
+        //Colocar los datos del cliente en el state
+        datosCliente(clienteConsulta.data);
     }
 
 
@@ -35,7 +38,7 @@ function EditarCliente() {
     //Leer los datos del formulario y colocarlos en el state
     const actualizarState = e => {
         //Almacenar lo que el usuario escribe en el state
-        guardarCliente({
+        datosCliente({
             ...cliente,
             [e.target.name]: e.target.value
         });
@@ -61,7 +64,7 @@ function EditarCliente() {
 
   return(
   <Fragment>
-    <h2>Nuevo Cliente</h2>
+    <h2>Editar Cliente</h2>
     <form>
                 <legend>Llena todos los campos</legend>
 
@@ -71,6 +74,7 @@ function EditarCliente() {
                             placeholder="Nombre Cliente" 
                             name="nombre"
                             onChange={actualizarState}
+                            value={cliente.nombre || ""}  
                             />
                 </div>
 
@@ -80,6 +84,7 @@ function EditarCliente() {
                             placeholder="Apellido Cliente" 
                             name="apellido"
                             onChange={actualizarState}
+                            value={cliente.apellido || ""}  
                             />
                 </div>
             
@@ -88,7 +93,9 @@ function EditarCliente() {
                     <input type="text" 
                             placeholder="Empresa Cliente" 
                             name="empresa"
-                            onChange={actualizarState}/>
+                            onChange={actualizarState}
+                            value={cliente.apellido || ""} 
+                            />
                 </div>
 
                 <div className="campo">
@@ -96,7 +103,9 @@ function EditarCliente() {
                     <input type="email" 
                             placeholder="Email Cliente" 
                             name="email"
-                            onChange={actualizarState}/>
+                            onChange={actualizarState}
+                            value={cliente.apellido || ""} 
+                            />
                 </div>
 
                 <div className="campo">
@@ -104,13 +113,15 @@ function EditarCliente() {
                     <input type="tel" 
                             placeholder="Teléfono Cliente" 
                             name="telefono"
-                            onChange={actualizarState}/>
+                            onChange={actualizarState}
+                            value={cliente.apellido || ""} 
+                            />
                 </div>
 
                 <div className="enviar">
                         <input  type="submit" 
                                 className="btn btn-azul" 
-                                value="Agregar Cliente"
+                                value="Guardar Cambios"
                                 disabled={validarCliente() }
                                 />
                 </div>
