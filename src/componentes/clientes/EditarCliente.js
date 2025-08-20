@@ -59,13 +59,38 @@ function EditarCliente() {
         return valido;
     }
 
+    //Enviar una peticion por axios para actualizar el cliente
+    const actualizarCliente = e => {
+        e.preventDefault();
 
+        //Enviar peticion por axios
+        clienteAxios.put(`/clientes/${id}`, cliente)
+            .then(res => {
+                //Validar si hay errores de mongo
+                if (res.data.code === 11000) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Hubo un error',
+                        text: 'Ese cliente ya está registrado'
+                    })
+                } else {
+                    Swal.fire(
+                        'Correcto',
+                        'Se actualizó el cliente correctamente',
+                        'success'
+                    )
+                }
+                //Redireccionar
+                window.location.href = "/clientes";
+
+            })
+    }
     
 
   return(
   <Fragment>
     <h2>Editar Cliente</h2>
-    <form>
+    <form onSubmit={actualizarCliente}>
                 <legend>Llena todos los campos</legend>
 
                 <div className="campo">
