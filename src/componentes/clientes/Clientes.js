@@ -26,7 +26,7 @@ function Clientes() {
   useEffect(() => {
     //Llamar a la función
     consultarAPI();
-  }, []);
+  }, [clientes]);
 
   return (
     <Fragment>
