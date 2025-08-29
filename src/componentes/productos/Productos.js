@@ -17,7 +17,7 @@ function Productos() {
       guardarProductos(data);
     }
     consultarAPI();
-  }, []);
+  }, [productos]);
 
   return (
       <Fragment>
