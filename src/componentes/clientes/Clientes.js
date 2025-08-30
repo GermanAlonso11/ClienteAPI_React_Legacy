@@ -1,5 +1,8 @@
 import React, { useEffect, useState, Fragment } from "react";
 
+//Importar spinner
+import '../layout/Spinner';
+
 //Importar cliente axios
 import clienteAxios from "../../config/axios";
 
@@ -27,6 +30,11 @@ function Clientes() {
     //Llamar a la función
     consultarAPI();
   }, [clientes]);
+
+  //Usar spinner de carga
+  if (!clientes.length) {
+    return <Spinner />;
+  }
 
   return (
     <Fragment>
