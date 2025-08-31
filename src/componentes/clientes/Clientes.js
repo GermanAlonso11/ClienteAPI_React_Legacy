@@ -1,7 +1,7 @@
 import React, { useEffect, useState, Fragment } from "react";
 
 //Importar spinner
-import '../layout/Spinner';
+import Spinner from '../layout/Spinner';
 
 //Importar cliente axios
 import clienteAxios from "../../config/axios";
