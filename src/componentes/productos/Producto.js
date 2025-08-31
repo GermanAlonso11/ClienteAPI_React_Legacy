@@ -1,9 +1,10 @@
 import React from "react";
 import { Link } from "react-router-dom";
 //Importar sweetalert
-import swal from "sweetalert";
+import Swal from "sweetalert2";
 //Importar axios
 import clienteAxios from "../../config/axios";
+
 
 function Producto({ producto }) {
   const { _id, nombre, precio, imagen } = producto;
@@ -15,24 +16,27 @@ function Producto({ producto }) {
     );
     if (confirmar) {
       //Alerta sweetalert
-      swal({
+      Swal.fire({
         title: "¿Estás seguro?",
         text: "Una vez eliminado, no podrás recuperar este producto",
         icon: "warning",
-        buttons: true,
-        dangerMode: true,
-      }).then((willDelete) => {
-        if (willDelete) {
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Sí, eliminar",
+        cancelButtonText: "No, cancelar",
+      }).then((result) => {
+        if (result.isConfirmed) {
           //Eliminado y alerta de borrado exitoso
-          swal("¡Producto eliminado!", {
-            text: res.data.mensaje,
+          Swal.fire("¡Producto eliminado!", {
+            text: result.data.mensaje,
             icon: "success",
           });
           //Llamar a la api y eliminar
           clienteAxios
             .delete(`/productos/${id}`)
-            .then((res) => {
-              console.log(res);
+            .then((result) => {
+              console.log(result);
               // Eliminar el producto del state
               guardarProductos(
                 productos.filter((producto) => producto._id !== id)

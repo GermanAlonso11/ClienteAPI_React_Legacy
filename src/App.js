@@ -14,7 +14,6 @@ import Pedidos from "./componentes/pedidos/Pedidos";
 import NuevoCliente from "./componentes/clientes/NuevoCliente";
 import EditarCliente from "./componentes/clientes/EditarCliente";
 
-import Productos from "./componentes/productos/Productos";
 import EditarProducto from "./componentes/productos/EditarProducto";
 import NuevoProducto from "./componentes/productos/NuevoProducto";
 
