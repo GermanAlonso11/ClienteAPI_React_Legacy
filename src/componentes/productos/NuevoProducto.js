@@ -1,3 +1,4 @@
+// Importación de dependencias necesarias
 import e from 'cors';
 import React, {Fragment, useState} from 'react';
 import Swal from 'sweetalert2';
@@ -5,18 +6,21 @@ import clienteAxios from '../../config/axios';
 import { useNavigate } from 'react-router-dom';
 
 
+// Componente para agregar un nuevo producto
 function NuevoProducto() {
   const navigate = useNavigate();
 
+  // State para los datos del producto
   const [producto, guardarProducto] = useState({
     nombre: '',
     precio: ''
   });
 
-  //archivo = state, guardarArchivo = setState
+  // State para almacenar el archivo de imagen
+  // archivo = state, guardarArchivo = setState
   const [archivo, guardarArchivo] = useState('');
 
-  //Leer los datos del formulario
+  // Función para leer los datos del formulario y actualizar el state del producto
   const leerInformacionProducto = e => {
     guardarProducto({
       ...producto,
@@ -24,35 +28,38 @@ function NuevoProducto() {
     });
   };
 
-  //Coloca la imagen en el state
+  // Función para colocar la imagen seleccionada en el state
   const leerArchivo = e => {
     guardarArchivo(e.target.files[0]);
   };
 
+  // Función para enviar el formulario y agregar el producto
   const agregarProducto = async e => {
     e.preventDefault();
 
-    // Crear un objeto FormData
+    // Crear un objeto FormData para enviar los datos y la imagen
     const formData = new FormData();
 
-    //Agregar los campos al FormData
+    // Agregar los campos al FormData
     formData.append('nombre', producto.nombre);
     formData.append('precio', producto.precio);
     formData.append('imagen', archivo);
 
     try {
+      // Enviar la petición al backend para crear el producto
       await clienteAxios.post('/productos', formData, {
         headers: {
           'Content-Type': 'multipart/form-data'
         }
       });
+      // Mostrar mensaje de éxito
       Swal.fire({
         icon: 'success',
         title: 'Producto agregado',
         text: 'El producto se ha agregado correctamente'
       });
 
-      //Redireccionar
+      // Redireccionar a la lista de productos
       navigate('/productos');
 
     } catch (error) {
@@ -64,6 +71,7 @@ function NuevoProducto() {
     }
   };
 
+  // Renderizado del formulario para agregar un nuevo producto
   return (
     <div>
       <Fragment>
