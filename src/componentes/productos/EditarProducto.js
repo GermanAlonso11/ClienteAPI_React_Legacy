@@ -49,11 +49,37 @@ function EditarProducto() {
     );
   }
 
+  //Edita el producto
+  const editarProducto = async e => {
+    e.preventDefault();
+
+    // Crear un FormData
+    const formData = new FormData();
+    formData.append('nombre', nombre);
+    formData.append('precio', precio);
+    formData.append('imagen', imagen);
+
+    try {
+      await clienteAxios.put(`/productos/${id}`, formData);
+      Swal.fire(
+        'Correcto',
+        'El producto se editó correctamente',
+        'success'
+      );
+    } catch (error) {
+      Swal.fire(
+        'Error',
+        'Hubo un error al editar el producto',
+        'error'
+      );
+    }
+  };
+
   return (
     <Fragment>
             <h2>Editar Producto</h2>
     
-                <form>
+                <form onSubmit={editarProducto}>
                     <legend>Edita todos los campos</legend>
     
                     <div className="campo">
@@ -89,7 +115,7 @@ function EditarProducto() {
                     <div className="enviar">
                             <input type="submit" 
                             className="btn btn-azul" 
-                            value="Agregar Producto"/>
+                            value="Editar Producto"/>
                     </div>
                 </form>
           </Fragment>
