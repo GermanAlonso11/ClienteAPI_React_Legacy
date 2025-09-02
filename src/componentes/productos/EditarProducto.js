@@ -24,8 +24,75 @@ function EditarProducto() {
     consultarApi();
   }, []);
 
+  // Función para leer los datos del formulario y actualizar el state del producto
+  const leerInformacionProducto = e => {
+    guardarProducto({
+      ...producto,
+      [e.target.name]: e.target.value
+    });
+  };
+
+  // Función para colocar la imagen seleccionada en el state
+  const leerArchivo = e => {
+    guardarArchivo(e.target.files[0]);
+  };
+
+  //Extraer los valores del state
+  const { nombre, precio, imagen } = producto;
+
+  if(!nombre || !precio || !imagen) {
+    return (
+      <Fragment>
+        <Spinner />
+
+      </Fragment>
+    );
+  }
+
   return (
-    <h2>Editar Producto {id}</h2>
+    <Fragment>
+            <h2>Editar Producto</h2>
+    
+                <form>
+                    <legend>Edita todos los campos</legend>
+    
+                    <div className="campo">
+                        <label>Nombre:</label>
+                        <input type="text" 
+                        placeholder="Nombre Producto" 
+                        name="nombre"
+                        onChange={leerInformacionProducto}
+                        defaultValue={nombre}
+                        />
+                    </div>
+    
+                    <div className="campo">
+                        <label>Precio:</label>
+                        <input type="number" 
+                        name="precio" min="0.00" 
+                        step="0.01" placeholder="Precio" 
+                        onChange={leerInformacionProducto}
+                        defaultValue={precio}
+                        />
+                    </div>
+                
+                    <div className="campo">
+                        <label>Imagen:</label>
+                        {imagen ? <img src={imagen} alt="Imagen Producto" /> : null}
+                        <input type="file"  
+                        name="imagen" 
+                        onChange={leerArchivo}
+
+                        />
+                    </div>
+    
+                    <div className="enviar">
+                            <input type="submit" 
+                            className="btn btn-azul" 
+                            value="Agregar Producto"/>
+                    </div>
+                </form>
+          </Fragment>
   );
 }
 
