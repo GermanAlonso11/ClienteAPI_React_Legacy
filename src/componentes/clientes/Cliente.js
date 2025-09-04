@@ -11,6 +11,7 @@ function Cliente({cliente}) {
     const {_id, nombre, apellido, empresa, email, telefono} = cliente;
 
     //Eliminar cliente con mensajes de confirmación de sweetalert2 y axios
+    //WIP
     const eliminarCliente = id => {
         //Preguntar al usuario si está seguro de eliminar el cliente
         Swal.fire({
